@@ -1,0 +1,17 @@
+<%= simple_form_for(@entry) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :body %>
+
+    <%= @entry.tags.map(&:name).join(', ') %><br>
+    <%= f.input :tag_ids, :as => :check_boxes, :collection => Tag.all %>
+  </div>
+
+  <%= select_tag :phase, options_for_select(%w(draft publish), params[:phase]) %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
